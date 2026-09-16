@@ -1,14 +1,11 @@
-from crud import create_prodotto
-from db.models import create_tables
+from db.databaseConnector import engine
 
-create_tables()
-
-for i in range(2):
+with engine.connect() as engine:
     try:
-        nome  = input("Email: ")
-        categoria = input("Cattegoria: ")
-        prezzo = float(input("Prezzo: "))
-        quantity = int(input("Quantity: "))
-        create_prodotto(nome, categoria, prezzo, quantity)
+        print("Connesso")
     except Exception as e:
         print(e)
+
+
+
+
