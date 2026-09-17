@@ -1,10 +1,15 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 from contextlib import contextmanager
+import os
+from dotenv import load_dotenv
 
-database_URL = "mysql+pymysql://root:@localhost:3306/database"
+load_dotenv()
 
-engine = create_engine(database_URL, echo=True)
+
+DATABASE_URL = f"mysql+pymysql://{os.getenv("DB_USER")}:{os.getenv("DB_PASS")}@{os.getenv("DB_HOST")}/{os.getenv("DB_NAME")}"
+
+engine = create_engine(DATABASE_URL, echo=True)
 
 Session = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 

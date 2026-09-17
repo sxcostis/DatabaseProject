@@ -1,11 +1,5 @@
-from db.databaseConnector import engine
+from ui.app_ui import App
 
-with engine.connect() as engine:
-    try:
-        print("Connesso")
-    except Exception as e:
-        print(e)
-
-
-
-
+if __name__ == "__main__":
+    app = App()
+    app.mainloop()

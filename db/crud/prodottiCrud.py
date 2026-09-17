@@ -14,6 +14,10 @@ def get_prodotto(pid):
         prodotto = session.query(Prodotti).filter(Prodotti.id == pid).first()
         return prodotto
 
+def get_prodotti():
+    with get_session() as session:
+        return session.query(Prodotti).all()
+
 def update_prodotto(pid, **kwargs):
     with get_session() as session:
         prodotto = session.query(Prodotti).filter(Prodotti.id == pid).first()

@@ -9,3 +9,6 @@ class Prodotti(Base):
     category = Column(String(50), nullable=False)
     prezzo = Column(Float, nullable=False)
     quantity = Column(Integer, nullable=False)
+
+    def __str__(self):
+        return f"ID: {self.id} Nome: {self.nome} Categoria: {self.category} Prezzo: {self.prezzo} Quantitá: {self.quantity}"
