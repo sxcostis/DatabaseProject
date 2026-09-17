@@ -11,7 +11,7 @@ DATABASE_URL = f"mysql+pymysql://{os.getenv("DB_USER")}:{os.getenv("DB_PASS")}@{
 
 engine = create_engine(DATABASE_URL, echo=True)
 
-Session = sessionmaker(bind=engine, autoflush=False, autocommit=False)
+Session = sessionmaker(bind=engine, autoflush=False, autocommit=False, expire_on_commit=False)
 
 Base = declarative_base()
 

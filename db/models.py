@@ -11,4 +11,4 @@ class Prodotti(Base):
     quantity = Column(Integer, nullable=False)
 
     def __str__(self):
-        return f"ID: {self.id} Nome: {self.nome} Categoria: {self.category} Prezzo: {self.prezzo} Quantitá: {self.quantity}"
+        return f"ID: {self.id}\nNome: {self.nome}\nCategoria: {self.category}\nPrezzo: {self.prezzo}\nQuantitá: {self.quantity}"

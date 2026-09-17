@@ -1,5 +1,5 @@
 import customtkinter as ctk
-from ui_logic.aggiungi_prodotto_logic import aggiungi_prodotto_to_db
+from ui_logic.aggiungi_prodotto_logic import aggiungi_prodotto_to_db, aggiorna_lista
 
 
 class AggiungiProdotto(ctk.CTkFrame):
@@ -171,7 +171,13 @@ class AggiungiProdotto(ctk.CTkFrame):
             hover_color="#74C7EC",
             height=45,
             corner_radius=10,
-            command=lambda: aggiungi_prodotto_to_db(self.entry_nome, self.entry_categoria, self.entry_prezzo,self.entry_quantity)
+            command=lambda: aggiungi_prodotto_to_db(
+                self.entry_nome,
+                self.entry_categoria,
+                self.entry_prezzo,
+                self.entry_quantity,
+                self.output_textbox
+            )
         )
         self.btn_salva.pack(fill="x", padx=25, pady=10)
 
@@ -201,3 +207,4 @@ class AggiungiProdotto(ctk.CTkFrame):
             state="disabled"
         )
         self.output_textbox.pack(fill="both", expand=True, padx=20, pady=(0, 20))
+        aggiorna_lista(self.output_textbox)
