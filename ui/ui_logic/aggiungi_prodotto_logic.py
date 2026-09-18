@@ -20,7 +20,6 @@ def aggiungi_prodotto_to_db(entry_nome, entry_categoria, entry_prezzo, entry_qua
     entry_categoria.delete(0, "end")
     entry_prezzo.delete(0, "end")
     entry_quantity.delete(0, "end")
-
     aggiungi_prodotto(nome, categoria, prezzo, quantity)
     aggiorna_lista(text_box)
 

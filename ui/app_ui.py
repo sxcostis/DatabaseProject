@@ -10,7 +10,7 @@ class App(ctk.CTk):
         ctk.set_appearance_mode("Dark")
 
         self.geometry("1280x820")
-        self.title("Gestione Magazzino Professional")
+        self.title("Gestione Magazzino")
         self.resizable(False, False)
 
         self.configure(fg_color="#1E1E2E")

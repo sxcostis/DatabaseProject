@@ -1,5 +1,6 @@
 import customtkinter as ctk
 
+from ui_logic.aggiorna_prodotto_logic import aggiorna_lista, aggiorna_prodotto_esistente
 
 
 class AggiornaProdotto(ctk.CTkFrame):
@@ -90,6 +91,24 @@ class AggiornaProdotto(ctk.CTkFrame):
         )
         self.titolo_center.pack(pady=(25, 20), padx=20, anchor="w")
 
+        self.lbl_id = ctk.CTkLabel(
+            self.center_frame,
+            text="ID",
+            font=("Bahnschrift", 14),
+            text_color="#A6ADC8"
+        )
+        self.lbl_id.pack(anchor="w", padx=25, pady=(10,2))
+
+        self.entry_id = ctk.CTkEntry(
+            self.center_frame,
+            placeholder_text="0",
+            height=40,
+            fg_color="#181825",
+            border_color="#45475A",
+            text_color="#CDD6F4"
+        )
+        self.entry_id.pack(fill="x", padx=25, pady=(0, 15))
+
         self.lbl_nome = ctk.CTkLabel(
             self.center_frame,
             text="Nome Prodotto",
@@ -116,7 +135,7 @@ class AggiornaProdotto(ctk.CTkFrame):
         )
         self.lbl_categoria.pack(anchor="w", padx=25, pady=(10, 2))
 
-        self.entry_categoria = ctk.CTkEntry(
+        self.entry_category = ctk.CTkEntry(
             self.center_frame,
             placeholder_text="es. Elettronica",
             height=40,
@@ -124,7 +143,7 @@ class AggiornaProdotto(ctk.CTkFrame):
             border_color="#45475A",
             text_color="#CDD6F4"
         )
-        self.entry_categoria.pack(fill="x", padx=25, pady=(0, 15))
+        self.entry_category.pack(fill="x", padx=25, pady=(0, 15))
 
         self.lbl_prezzo = ctk.CTkLabel(
             self.center_frame,
@@ -170,9 +189,28 @@ class AggiornaProdotto(ctk.CTkFrame):
             text_color="#11111B",
             hover_color="#74C7EC",
             height=45,
-            corner_radius=10
+            corner_radius=10,
+            command=lambda: aggiorna_prodotto_esistente(
+                self.entry_id,
+                self.entry_nome,
+                self.entry_category,
+                self.entry_prezzo,
+                self.entry_quantity,
+                self.output_textbox
+            )
         )
         self.btn_salva.pack(fill="x", padx=25, pady=10)
+
+        self.lbl_info = ctk.CTkLabel(
+            self.center_frame,
+            text="Inserire l'ID é obbligatorio per l'identificazione del prodotto.\n"
+                 "Gli altri campi sono opzionali.\n"
+                 "(ID non modificabile)",
+            font=("Bahnschrift", 14),
+            text_color="#A6ADC8",
+            justify="left",
+        )
+        self.lbl_info.pack(anchor="w", padx=25, pady=(10, 2))
 
         # ==========================================
         # COLONNA 3
@@ -188,7 +226,6 @@ class AggiornaProdotto(ctk.CTkFrame):
         )
         self.titolo_right.pack(pady=(25, 15), padx=20, anchor="w")
 
-        # Textbox Stilizzata
         self.output_textbox = ctk.CTkTextbox(
             self.right_frame,
             fg_color="#181825",
@@ -200,3 +237,4 @@ class AggiornaProdotto(ctk.CTkFrame):
             state="disabled"
         )
         self.output_textbox.pack(fill="both", expand=True, padx=20, pady=(0, 20))
+        aggiorna_lista(self.output_textbox)

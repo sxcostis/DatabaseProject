@@ -195,7 +195,7 @@ class AggiungiProdotto(ctk.CTkFrame):
         )
         self.titolo_right.pack(pady=(25, 15), padx=20, anchor="w")
 
-        # Textbox Stilizzata
+
         self.output_textbox = ctk.CTkTextbox(
             self.right_frame,
             fg_color="#181825",

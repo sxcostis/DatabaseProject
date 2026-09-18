@@ -22,27 +22,27 @@ def aggiungi_prodotto(nome, category, prezzo, quantity):
 
     return create_prodotto(nome, category, prezzo, quantity)
 
-def aggiorna_prodotto(pid, **kwargs):
+def aggiorna_prodotto(pid, dict):
     key_valide = ["nome", "category", "prezzo", "quantity"]
 
-    for key in kwargs:
+    for key in dict:
         if key not in key_valide:
             raise ValueError("Key deve essere valido")
 
         if key == "nome":
-            valida_nome(kwargs["nome"])
+            valida_nome(dict["nome"])
 
         if key == "category":
-            valida_category(kwargs["category"])
+            valida_category(dict["category"])
 
         if key == "prezzo":
-            valida_prezzo(kwargs["prezzo"])
+            valida_prezzo(dict["prezzo"])
 
         if key == "quantity":
-            valida_quantity(kwargs["quantity"])
+            valida_quantity(dict["quantity"])
 
 
-    return update_prodotto(pid, **kwargs)
+    return update_prodotto(pid, dict)
 
 def elimina_prodotto(pid):
     valida_id(pid)

@@ -18,10 +18,10 @@ def get_prodotti():
     with get_session() as session:
         return session.query(Prodotti).all()
 
-def update_prodotto(pid, **kwargs):
+def update_prodotto(pid, dict):
     with get_session() as session:
         prodotto = session.query(Prodotti).filter(Prodotti.id == pid).first()
-        for key, value in kwargs.items():
+        for key, value in dict.items():
             setattr(prodotto, key, value)
 
 def delete_prodotto(pid):
