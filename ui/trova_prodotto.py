@@ -150,5 +150,6 @@ class TrovaProdotto(ctk.CTkFrame):
         self.output_textbox.pack(fill="both", expand=True, padx=20, pady=(0, 20))
         aggiorna_lista(self.output_textbox)
 
+
     def aggiorna_lista_prodotto(self):
         aggiorna_lista(self.output_textbox)
