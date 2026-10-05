@@ -24,10 +24,12 @@ def aggiungi_prodotto_to_db(entry_nome, entry_categoria, entry_prezzo, entry_qua
     aggiorna_lista(text_box)
 
 def aggiorna_lista(text_box):
-    listaProdotti = get_prodotti()
+    lista_prodotti = get_prodotti()
+
     text_box.configure(state="normal")
     text_box.delete("1.0", "end")
 
-    for p in listaProdotti:
+    for p in lista_prodotti:
         text_box.insert("end", f"{p}\n\n")
+
     text_box.configure(state="disabled")

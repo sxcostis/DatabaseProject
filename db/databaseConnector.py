@@ -9,7 +9,7 @@ load_dotenv()
 
 DATABASE_URL = f"mysql+pymysql://{os.getenv("DB_USER")}:{os.getenv("DB_PASS")}@{os.getenv("DB_HOST")}/{os.getenv("DB_NAME")}"
 
-engine = create_engine(DATABASE_URL, echo=True)
+engine = create_engine(DATABASE_URL, echo=False)
 
 Session = sessionmaker(bind=engine, autoflush=False, autocommit=False, expire_on_commit=False)
 

@@ -1,9 +1,8 @@
 import customtkinter as ctk
+from ui_logic.trova_prodotto_logic import aggiorna_lista, trova_prodotto_ui
 
-from ui_logic.aggiorna_prodotto_logic import aggiorna_lista, aggiorna_prodotto_esistente
 
-
-class AggiornaProdotto(ctk.CTkFrame):
+class TrovaProdotto(ctk.CTkFrame):
     def __init__(self, parent, controller):
         super().__init__(parent, fg_color="transparent")
         self.controller = controller
@@ -45,11 +44,12 @@ class AggiornaProdotto(ctk.CTkFrame):
             self.sidebar_frame,
             text="Aggiorna Prodotto",
             font=("Bahnschrift", 18, "bold"),
-            fg_color="#45475A",
+            fg_color="transparent",
             text_color="#A6ADC8",
-            hover_color="#45475A",
+            hover_color="#313244",
             height=45,
             anchor="w",
+            command=lambda: self.controller.mostra_schermata("AggiornaProdotto")
         )
         self.btn_nav_aggiorna_prodotto.pack(fill="x", padx=15, pady=8)
 
@@ -70,12 +70,11 @@ class AggiornaProdotto(ctk.CTkFrame):
             self.sidebar_frame,
             text="Trova Prodotto",
             font=("Bahnschrift", 18, "bold"),
-            fg_color="transparent",
+            fg_color="#45475A",
             text_color="#A6ADC8",
-            hover_color="#313244",
+            hover_color="#45475A",
             height=45,
-            anchor="w",
-            command=lambda: self.controller.mostra_schermata("TrovaProdotto")
+            anchor="w"
         )
         self.btn_nav_trova_prodotto.pack(fill="x", padx=15, pady=8)
 
@@ -87,7 +86,7 @@ class AggiornaProdotto(ctk.CTkFrame):
 
         self.titolo_center = ctk.CTkLabel(
             self.center_frame,
-            text="Aggiorna Prodotto",
+            text="Trova Prodotto",
             font=("Bahnschrift", 24, "bold"),
             text_color="#CDD6F4"
         )
@@ -111,108 +110,18 @@ class AggiornaProdotto(ctk.CTkFrame):
         )
         self.entry_id.pack(fill="x", padx=25, pady=(0, 15))
 
-        self.lbl_nome = ctk.CTkLabel(
+        self.btn_nav_trova_prodotto = ctk.CTkButton(
             self.center_frame,
-            text="Nome Prodotto",
-            font=("Bahnschrift", 14),
-            text_color="#A6ADC8"
-        )
-        self.lbl_nome.pack(anchor="w", padx=25, pady=(10, 2))
-
-        self.entry_nome = ctk.CTkEntry(
-            self.center_frame,
-            placeholder_text="es. Mouse Wireless",
-            height=40,
-            fg_color="#181825",
-            border_color="#45475A",
-            text_color="#CDD6F4"
-        )
-        self.entry_nome.pack(fill="x", padx=25, pady=(0, 15))
-
-        self.lbl_categoria = ctk.CTkLabel(
-            self.center_frame,
-            text="Categoria",
-            font=("Bahnschrift", 14),
-            text_color="#A6ADC8"
-        )
-        self.lbl_categoria.pack(anchor="w", padx=25, pady=(10, 2))
-
-        self.entry_category = ctk.CTkEntry(
-            self.center_frame,
-            placeholder_text="es. Elettronica",
-            height=40,
-            fg_color="#181825",
-            border_color="#45475A",
-            text_color="#CDD6F4"
-        )
-        self.entry_category.pack(fill="x", padx=25, pady=(0, 15))
-
-        self.lbl_prezzo = ctk.CTkLabel(
-            self.center_frame,
-            text="Prezzo (€)",
-            font=("Bahnschrift", 14),
-            text_color="#A6ADC8"
-        )
-        self.lbl_prezzo.pack(anchor="w", padx=25, pady=(10, 2))
-
-        self.entry_prezzo = ctk.CTkEntry(
-            self.center_frame,
-            placeholder_text="0.00",
-            height=40,
-            fg_color="#181825",
-            border_color="#45475A",
-            text_color="#CDD6F4"
-        )
-        self.entry_prezzo.pack(fill="x", padx=25, pady=(0, 25))
-
-        self.lbl_quantity = ctk.CTkLabel(
-            self.center_frame,
-            text="Quantitá",
-            font=("Bahnschrift", 14),
-            text_color="#A6ADC8"
-        )
-        self.lbl_quantity.pack(anchor="w", padx=25, pady=(10, 2))
-
-        self.entry_quantity = ctk.CTkEntry(
-            self.center_frame,
-            placeholder_text="0",
-            height=40,
-            fg_color="#181825",
-            border_color="#45475A",
-            text_color="#CDD6F4"
-        )
-        self.entry_quantity.pack(fill="x", padx=25, pady=(0, 25))
-
-        self.btn_salva = ctk.CTkButton(
-            self.center_frame,
-            text="Salva Prodotto",
+            text="Trova Prodotto",
             font=("Bahnschrift", 16, "bold"),
             fg_color="#89B4FA",
             text_color="#11111B",
             hover_color="#74C7EC",
             height=45,
             corner_radius=10,
-            command=lambda: aggiorna_prodotto_esistente(
-                self.entry_id,
-                self.entry_nome,
-                self.entry_category,
-                self.entry_prezzo,
-                self.entry_quantity,
-                self.output_textbox
-            )
+            command =lambda : trova_prodotto_ui(self.entry_id , self.output_textbox)
         )
-        self.btn_salva.pack(fill="x", padx=25, pady=10)
-
-        self.lbl_info = ctk.CTkLabel(
-            self.center_frame,
-            text="Inserire l'ID é obbligatorio per l'identificazione del prodotto.\n"
-                 "Gli altri campi sono opzionali.\n"
-                 "(ID non modificabile)",
-            font=("Bahnschrift", 14),
-            text_color="#A6ADC8",
-            justify="left",
-        )
-        self.lbl_info.pack(anchor="w", padx=25, pady=(10, 2))
+        self.btn_nav_trova_prodotto.pack(fill="x", padx=15, pady=8)
 
         # ==========================================
         # COLONNA 3

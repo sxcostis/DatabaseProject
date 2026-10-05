@@ -1,14 +1,14 @@
 import customtkinter as ctk
 
-from ui_logic.aggiorna_prodotto_logic import aggiorna_lista, aggiorna_prodotto_esistente
+from ui_logic.elimina_prodotto_logic import aggiorna_lista, elimina_prodotto_per_id
 
-
-class AggiornaProdotto(ctk.CTkFrame):
-    def __init__(self, parent, controller):
-        super().__init__(parent, fg_color="transparent")
+class EliminaProdotto(ctk.CTkFrame):
+    def __init__(self,parent, controller):
+        super().__init__(parent, fg_color="#1E1E2E")
         self.controller = controller
 
         # Configurazione Layout
+
         self.grid_columnconfigure(0, weight=0, minsize=220)
         self.grid_columnconfigure(1, weight=0, minsize=530)
         self.grid_columnconfigure(2, weight=0, minsize=530)
@@ -45,11 +45,12 @@ class AggiornaProdotto(ctk.CTkFrame):
             self.sidebar_frame,
             text="Aggiorna Prodotto",
             font=("Bahnschrift", 18, "bold"),
-            fg_color="#45475A",
+            fg_color="transparent",
             text_color="#A6ADC8",
-            hover_color="#45475A",
+            hover_color="#313244",
             height=45,
             anchor="w",
+            command=lambda: self.controller.mostra_schermata("AggiornaProdotto")
         )
         self.btn_nav_aggiorna_prodotto.pack(fill="x", padx=15, pady=8)
 
@@ -57,12 +58,11 @@ class AggiornaProdotto(ctk.CTkFrame):
             self.sidebar_frame,
             text="Elimina Prodotto",
             font=("Bahnschrift", 18, "bold"),
-            fg_color="transparent",
+            fg_color="#45475A",
             text_color="#A6ADC8",
-            hover_color="#313244",
+            hover_color="#45475A",
             height=45,
-            anchor="w",
-            command=lambda: self.controller.mostra_schermata("EliminaProdotto")
+            anchor="w"
         )
         self.btn_nav_elimina_prodotto.pack(fill="x", padx=15, pady=8)
 
@@ -87,19 +87,19 @@ class AggiornaProdotto(ctk.CTkFrame):
 
         self.titolo_center = ctk.CTkLabel(
             self.center_frame,
-            text="Aggiorna Prodotto",
-            font=("Bahnschrift", 24, "bold"),
-            text_color="#CDD6F4"
+        text="Elimina Prodotto",
+        font=("Bahnschrift", 24, "bold"),
+        text_color="#CDD6F4"
         )
         self.titolo_center.pack(pady=(25, 20), padx=20)
 
         self.lbl_id = ctk.CTkLabel(
             self.center_frame,
             text="ID",
-            font=("Bahnschrift", 14),
+            font=("Bahnschrift", 14, "bold"),
             text_color="#A6ADC8"
         )
-        self.lbl_id.pack(anchor="w", padx=25, pady=(10,2))
+        self.lbl_id.pack(pady=(10, 2), padx=25, anchor="w")
 
         self.entry_id = ctk.CTkEntry(
             self.center_frame,
@@ -109,120 +109,31 @@ class AggiornaProdotto(ctk.CTkFrame):
             border_color="#45475A",
             text_color="#CDD6F4"
         )
-        self.entry_id.pack(fill="x", padx=25, pady=(0, 15))
+        self.entry_id.pack(pady=(0, 15), padx=25, anchor="w", fill="x")
 
-        self.lbl_nome = ctk.CTkLabel(
+        self.btn_nav_elimina_prodotto = ctk.CTkButton(
             self.center_frame,
-            text="Nome Prodotto",
-            font=("Bahnschrift", 14),
-            text_color="#A6ADC8"
-        )
-        self.lbl_nome.pack(anchor="w", padx=25, pady=(10, 2))
-
-        self.entry_nome = ctk.CTkEntry(
-            self.center_frame,
-            placeholder_text="es. Mouse Wireless",
-            height=40,
-            fg_color="#181825",
-            border_color="#45475A",
-            text_color="#CDD6F4"
-        )
-        self.entry_nome.pack(fill="x", padx=25, pady=(0, 15))
-
-        self.lbl_categoria = ctk.CTkLabel(
-            self.center_frame,
-            text="Categoria",
-            font=("Bahnschrift", 14),
-            text_color="#A6ADC8"
-        )
-        self.lbl_categoria.pack(anchor="w", padx=25, pady=(10, 2))
-
-        self.entry_category = ctk.CTkEntry(
-            self.center_frame,
-            placeholder_text="es. Elettronica",
-            height=40,
-            fg_color="#181825",
-            border_color="#45475A",
-            text_color="#CDD6F4"
-        )
-        self.entry_category.pack(fill="x", padx=25, pady=(0, 15))
-
-        self.lbl_prezzo = ctk.CTkLabel(
-            self.center_frame,
-            text="Prezzo (€)",
-            font=("Bahnschrift", 14),
-            text_color="#A6ADC8"
-        )
-        self.lbl_prezzo.pack(anchor="w", padx=25, pady=(10, 2))
-
-        self.entry_prezzo = ctk.CTkEntry(
-            self.center_frame,
-            placeholder_text="0.00",
-            height=40,
-            fg_color="#181825",
-            border_color="#45475A",
-            text_color="#CDD6F4"
-        )
-        self.entry_prezzo.pack(fill="x", padx=25, pady=(0, 25))
-
-        self.lbl_quantity = ctk.CTkLabel(
-            self.center_frame,
-            text="Quantitá",
-            font=("Bahnschrift", 14),
-            text_color="#A6ADC8"
-        )
-        self.lbl_quantity.pack(anchor="w", padx=25, pady=(10, 2))
-
-        self.entry_quantity = ctk.CTkEntry(
-            self.center_frame,
-            placeholder_text="0",
-            height=40,
-            fg_color="#181825",
-            border_color="#45475A",
-            text_color="#CDD6F4"
-        )
-        self.entry_quantity.pack(fill="x", padx=25, pady=(0, 25))
-
-        self.btn_salva = ctk.CTkButton(
-            self.center_frame,
-            text="Salva Prodotto",
+            text="Elimina Prodotto",
             font=("Bahnschrift", 16, "bold"),
             fg_color="#89B4FA",
             text_color="#11111B",
             hover_color="#74C7EC",
             height=45,
             corner_radius=10,
-            command=lambda: aggiorna_prodotto_esistente(
-                self.entry_id,
-                self.entry_nome,
-                self.entry_category,
-                self.entry_prezzo,
-                self.entry_quantity,
-                self.output_textbox
-            )
+            command = lambda: elimina_prodotto_per_id(self.entry_id, self.output_textbox)
         )
-        self.btn_salva.pack(fill="x", padx=25, pady=10)
-
-        self.lbl_info = ctk.CTkLabel(
-            self.center_frame,
-            text="Inserire l'ID é obbligatorio per l'identificazione del prodotto.\n"
-                 "Gli altri campi sono opzionali.\n"
-                 "(ID non modificabile)",
-            font=("Bahnschrift", 14),
-            text_color="#A6ADC8",
-            justify="left",
-        )
-        self.lbl_info.pack(anchor="w", padx=25, pady=(10, 2))
+        self.btn_nav_elimina_prodotto.pack(fill="x", padx=15, pady=8)
 
         # ==========================================
         # COLONNA 3
         # ==========================================
+
         self.right_frame = ctk.CTkFrame(self, fg_color="#2B2B3B", corner_radius=15)
-        self.right_frame.grid(row=0, column=2, padx=(0, 20), pady=20, sticky="nsew")
+        self.right_frame.grid(row=0, column=2, padx=(0,20), pady=20, sticky="nsew")
 
         self.titolo_right = ctk.CTkLabel(
             self.right_frame,
-            text="Registro / Lista",
+            text = "Registro / Lista",
             font=("Bahnschrift", 24, "bold"),
             text_color="#CDD6F4"
         )
@@ -238,7 +149,7 @@ class AggiornaProdotto(ctk.CTkFrame):
             font=("Consolas", 14),
             state="disabled"
         )
-        self.output_textbox.pack(fill="both", expand=True, padx=20, pady=(0, 20))
+        self.output_textbox.pack(pady=(0, 20), padx=20, expand=True, fill="both")
         aggiorna_lista(self.output_textbox)
 
     def aggiorna_lista_prodotto(self):

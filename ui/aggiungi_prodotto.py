@@ -60,7 +60,8 @@ class AggiungiProdotto(ctk.CTkFrame):
             text_color="#A6ADC8",
             hover_color="#313244",
             height=45,
-            anchor="w"
+            anchor="w",
+            command=lambda: self.controller.mostra_schermata("EliminaProdotto")
         )
         self.btn_nav_elimina_prodotto.pack(fill="x", padx=15, pady=8)
 
@@ -72,7 +73,8 @@ class AggiungiProdotto(ctk.CTkFrame):
             text_color="#A6ADC8",
             hover_color="#313244",
             height=45,
-            anchor="w"
+            anchor="w",
+            command=lambda: self.controller.mostra_schermata("TrovaProdotto")
         )
         self.btn_nav_trova_prodotto.pack(fill="x", padx=15, pady=8)
 
@@ -88,7 +90,7 @@ class AggiungiProdotto(ctk.CTkFrame):
             font=("Bahnschrift", 24, "bold"),
             text_color="#CDD6F4"
         )
-        self.titolo_center.pack(pady=(25, 20), padx=20, anchor="w")
+        self.titolo_center.pack(pady=(25, 20), padx=20)
 
         self.lbl_nome = ctk.CTkLabel(
             self.center_frame,
@@ -164,7 +166,7 @@ class AggiungiProdotto(ctk.CTkFrame):
 
         self.btn_salva = ctk.CTkButton(
             self.center_frame,
-            text="Salva Prodotto",
+            text="Aggiungi Prodotto",
             font=("Bahnschrift", 16, "bold"),
             fg_color="#89B4FA",
             text_color="#11111B",
@@ -193,7 +195,7 @@ class AggiungiProdotto(ctk.CTkFrame):
             font=("Bahnschrift", 24, "bold"),
             text_color="#CDD6F4"
         )
-        self.titolo_right.pack(pady=(25, 15), padx=20, anchor="w")
+        self.titolo_right.pack(pady=(25, 15), padx=20)
 
 
         self.output_textbox = ctk.CTkTextbox(
@@ -207,4 +209,7 @@ class AggiungiProdotto(ctk.CTkFrame):
             state="disabled"
         )
         self.output_textbox.pack(fill="both", expand=True, padx=20, pady=(0, 20))
+        aggiorna_lista(self.output_textbox)
+
+    def aggiorna_lista_prodotto(self):
         aggiorna_lista(self.output_textbox)
